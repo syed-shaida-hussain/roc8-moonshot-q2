@@ -1,0 +1,21 @@
+:root {
+  --bg : white;
+  --text-color : black;
+  --light-bg : #f0f0f0;
+  --light-text-color : #626262;
+  --cta-btn-color : #0f172a;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+}
