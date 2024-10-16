@@ -15,7 +15,6 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/user/login' , user);
-      console.log(res)
       if(res.status !== 201) {
         setError({...error , usernameError : res?.data?.errors?.username , passwordError : res?.data?.errors?.password})
       }

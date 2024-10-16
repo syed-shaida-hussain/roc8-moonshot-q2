@@ -1,0 +1,15 @@
+.page{
+    display: flex;
+}
+
+.barChart, .lineChart{
+    padding: 2rem;
+    width: 50%;
+    height: 500px;
+    position: relative;
+}
+
+.barChart button{
+    max-width: fit-content;
+    min-height: 1rem;
+}

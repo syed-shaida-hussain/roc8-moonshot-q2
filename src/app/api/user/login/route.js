@@ -60,7 +60,7 @@ export async function POST (request) {
             status : 200,
             user,
             token
-        })
+        },{status : 200})
         response.cookies.set("token" , token)
         setCookie('token', token);
 
@@ -71,6 +71,6 @@ export async function POST (request) {
                 message: "Problem in logging in",
                 errors,
                 status : 500,
-        })
+        },{status : 500})
     }
 }
