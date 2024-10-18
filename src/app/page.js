@@ -13,16 +13,21 @@ const BarChart = dynamic(() => import("@/components/BarChart"), {
 
 
 const fetchData = async()  => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/data`)
-
-  // const res = await fetch("http://localhost:3000/api/data");
-  return res.json()
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/data`)
+    return res.json()
+  } catch (error) {
+    console.log(error.message)
+  }
 }
 
 const importData = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/google-sheet-data`)
-  // const res = await fetch("http://localhost:3000/api/google-sheet-data");
-  return res.json();
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/google-sheet-data`)
+    return res.json();
+  } catch (error) {
+    console.log(error.message)
+  }
 }
 
 export default async function Home() {
