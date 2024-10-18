@@ -21,25 +21,16 @@ const fetchData = async()  => {
   }
 }
 
-const importData = async () => {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/google-sheet-data`)
-    return res.json();
-  } catch (error) {
-    console.log(error.message)
-  }
-}
-
 export default async function Home() {
   if(!process.env.NEXT_PUBLIC_DOMAIN) {
     return null;
 }
   const {data} = await fetchData();
-  const {sheetData} = await importData();
+  console.log(data.length)
   return (
     <div className={styles.page} >
         <Suspense fallback = {<Loading />}>
-          <BarChart dataset = {sheetData} data2={data}  />
+          <BarChart dataset = {data}/>
         </Suspense>
         <LineChart />
     </div>

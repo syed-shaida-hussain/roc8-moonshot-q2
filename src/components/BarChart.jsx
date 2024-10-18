@@ -13,13 +13,13 @@ import Loading from "@/app/loading";
 
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title, zoomPlugin)
 
-const BarChart = ({dataset, data2}) => {
+const BarChart = ({dataset}) => {
     const chartRef = useRef(null);
     const searchParams = useSearchParams()
     const initialFilterData = {
         gender : searchParams.get("gender") || "",
-        startDate : new Date(),
-        endDate : new Date(),
+        startDate : dataset[0]?.Day,
+        endDate : dataset[10]?.Day,
         age : searchParams.get("age") || "",
         lineGraphFeature : null,
         lineGraphValue : null
@@ -27,12 +27,12 @@ const BarChart = ({dataset, data2}) => {
     const [filterData , setFilterData] = useState(initialFilterData)
     const {gender,startDate,endDate,age} = filterData;
 
-    const filteredDataByDay = data2.filter(item => {
+    const filteredDataByDay = dataset.filter(item => {
         const itemDate = new Date(item.Day);
         return itemDate >=new Date(startDate) && itemDate <= new Date(endDate);
     });
 
-    const filteredDataByGender = dataset.filter(item => {
+    const filteredDataByGender = filteredDataByDay.filter(item => {
         if(!gender) return dataset
         return item.Gender === gender
     })
@@ -41,9 +41,6 @@ const BarChart = ({dataset, data2}) => {
         if(!age) return filteredDataByGender
         return item.Age === age
     })
-
-    console.log(filteredDataByAge)
-
 
     const aggregatedData = filteredDataByAge.reduce(
     (acc, curr) => {
@@ -59,6 +56,8 @@ const BarChart = ({dataset, data2}) => {
     
     const featureKeys = Object.keys(aggregatedData); 
     const featureValues = Object.values(aggregatedData);
+
+    console.log(filterData)
 
     const data = {
         labels : featureKeys.reverse(),

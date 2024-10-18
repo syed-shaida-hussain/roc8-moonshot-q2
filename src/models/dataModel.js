@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const dataSchema = new mongoose.Schema({
     Day : {
-        type : String,
+        type : Date,
         required : [true , "provide a date"],
     },
     Age : {
