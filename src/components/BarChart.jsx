@@ -5,23 +5,25 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJs, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom";
 import { options } from "@/constants/options";
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 import Filters from "./Filters";
+import { useSearchParams } from "next/navigation";
+import Loading from "@/app/loading";
 
 
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title, zoomPlugin)
 
-const initialFilterData = {
-    gender : "",
-    startDate : new Date(),
-    endDate : new Date(),
-    age : "",
-    lineGraphFeature : null,
-    lineGraphValue : null
-}
-
 const BarChart = ({dataset, data2}) => {
     const chartRef = useRef(null);
+    const searchParams = useSearchParams()
+    const initialFilterData = {
+        gender : searchParams.get("gender") || "",
+        startDate : new Date(),
+        endDate : new Date(),
+        age : searchParams.get("age") || "",
+        lineGraphFeature : null,
+        lineGraphValue : null
+    }
     const [filterData , setFilterData] = useState(initialFilterData)
     const {gender,startDate,endDate,age} = filterData;
 
@@ -99,7 +101,9 @@ const BarChart = ({dataset, data2}) => {
 
   return (
     <div className = {`${styles.barChartContainer} flex`} >
-        <Filters filterData={filterData} setFilterData={setFilterData} initialFilterData={initialFilterData} />
+        <Suspense fallback = {<Loading />}>
+            <Filters filterData={filterData} setFilterData={setFilterData} initialFilterData={initialFilterData} />
+        </Suspense>
         <div className= {styles.barChart}>
         <Bar data={data} options={options} ref={chartRef} onClick={handleBarClick}/>
         <button onClick={resetZoomHandler}>Reset zoom</button>

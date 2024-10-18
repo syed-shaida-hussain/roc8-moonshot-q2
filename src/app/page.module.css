@@ -37,8 +37,13 @@
     text-align: left;
 }
 
-@media screen and (max-width : 1600px) {
+.filters select{
+    border: 1px solid black;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
 
+@media screen and (max-width : 1600px) {
     .barChartContainer{
         width: 50%;
     }

@@ -20,7 +20,6 @@ const Calender = ({filterData, setFilterData, isDateRangeOpen, setIsDateRangeOpe
       
       useEffect(() => {
         const handleClickOutside = (event) => {
-          console.log(event.target.name)
           if (pickerRef.current && !pickerRef.current.contains(event.target)) {
             setIsDateRangeOpen(false);
           }
@@ -32,7 +31,7 @@ const Calender = ({filterData, setFilterData, isDateRangeOpen, setIsDateRangeOpe
       }, []);
   return (
     <div className='modal' ref={pickerRef}>
-      {isDateRangeOpen && <><button className='close-btn' onClick={() => setIsDateRangeOpen(false)}>Close</button>
+      {isDateRangeOpen && <>
         <DateRangePicker
         ranges={[selectionRange]}
         onChange={handleSelect}

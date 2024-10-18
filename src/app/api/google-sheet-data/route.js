@@ -19,8 +19,6 @@ export async function GET() {
             return obj;
           }, {})
         );
-        console.log( "date is here : " , sheetData[0].Day)
-
         return NextResponse.json({
             message: "Google sheet data imported successfully",
             sheetData,

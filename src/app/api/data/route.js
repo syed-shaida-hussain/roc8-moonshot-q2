@@ -4,8 +4,9 @@ import { NextResponse } from "next/server"
 
 connect()
 
-export async function GET() {
+export async function GET(request) {
     try {
+        const { searchParams } = new URL(request.url);
         const data = await Data.find({})
         return NextResponse.json({
             message: "data imported successfully",
