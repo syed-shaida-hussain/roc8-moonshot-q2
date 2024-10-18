@@ -18,4 +18,66 @@ body{
     box-sizing: border-box;
     text-decoration: none;
     border: none;
+    list-style: none;
+    background: none;
+}
+
+/* Utility classes */
+
+.flex{
+  display: flex;
+}
+
+.flex-col{
+  display: flex;
+  flex-direction: column;
+}
+
+.gap-10{
+  gap: 10px;
+}
+
+.pl-10{
+  padding-left: 10px;
+}
+
+.pl-20{
+  padding-left: 20px;
+}
+
+.mt-10{
+  margin-top: 10px;
+}
+
+.modal{
+  position: absolute;
+  border: 1px solid blue;
+  z-index: 9999;
+  max-width: 100%;
+}
+
+.modal .close-btn{
+  position: absolute;
+  left: 90%;
+  top: -1.5rem;
+  z-index: 99999;
+}
+
+.page_filters__syETL li button {
+  width: 14% !important;
+}
+
+.rdrDateRangePickerWrapper{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+@media screen and (max-width : 1000px) {
+  .rdrCalendarWrappers{
+    width: 60% !important;
+  }
+  
+  .rdrDefinedRangesWrapper{
+    width: 30% !important;
+  }
 }

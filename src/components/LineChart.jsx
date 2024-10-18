@@ -16,7 +16,6 @@ const LineChart = () => {
                 backgroundColor : "#3b82f6",
                 borderColor : "#3b82f6",
                 pointBorderColor : "#3b82f6",
-                fill : true
             }
         ]
     }

@@ -5,28 +5,43 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJs, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom";
 import { options } from "@/constants/options";
-import { useRef } from "react";
+import { useState, useRef } from "react";
+import Filters from "./Filters";
 
 
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title, zoomPlugin)
 
-const BarChart = ({dataset}) => {
-    const chartRef = useRef(null);
-    const startDate = "4/10/2022"
-    const endDate = "6/10/2022"
+const initialFilterData = {
+    gender : "",
+    startDate : new Date(),
+    endDate : new Date(),
+    age : "",
+    lineGraphFeature : null,
+    lineGraphValue : null
+}
 
-    const filteredDataByDay = dataset.filter(item => {
+const BarChart = ({dataset, data2}) => {
+    const chartRef = useRef(null);
+    const [filterData , setFilterData] = useState(initialFilterData)
+    const {gender,startDate,endDate,age} = filterData;
+
+    const filteredDataByDay = data2.filter(item => {
         const itemDate = new Date(item.Day);
-        return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
+        return itemDate >=new Date(startDate) && itemDate <= new Date(endDate);
     });
 
-    const filteredDataByGender = filteredDataByDay.filter(item => {
-        return item.Gender === "Male"
+    const filteredDataByGender = dataset.filter(item => {
+        if(!gender) return dataset
+        return item.Gender === gender
     })
 
     const filteredDataByAge = filteredDataByGender.filter(item => {
-        return item.Age === "15-25"
+        if(!age) return filteredDataByGender
+        return item.Age === age
     })
+
+    console.log(filteredDataByAge)
+
 
     const aggregatedData = filteredDataByAge.reduce(
     (acc, curr) => {
@@ -71,11 +86,10 @@ const BarChart = ({dataset}) => {
           const point = points[0]; 
           const label = chart.data.labels[point.index]; 
           const value = chart.data.datasets[point.datasetIndex].data[point.index];
-    
+          setFilterData({...filterData, lineGraphFeature : label, lineGraphValue : value})
           console.log(`Clicked on: ${label}, Value: ${value}`);
         }
-
-      };
+};
 
       const resetZoomHandler = () => {
         if (chartRef.current) {
@@ -84,9 +98,13 @@ const BarChart = ({dataset}) => {
         }
 
   return (
-    <div className= {styles.barChart}>
+    <div className = {`${styles.barChartContainer} flex`} >
+        <Filters filterData={filterData} setFilterData={setFilterData} initialFilterData={initialFilterData} />
+        <div className= {styles.barChart}>
         <Bar data={data} options={options} ref={chartRef} onClick={handleBarClick}/>
         <button onClick={resetZoomHandler}>Reset zoom</button>
+        </div>
+        
     </div>
   )
 }

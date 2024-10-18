@@ -2,14 +2,101 @@
     display: flex;
 }
 
-.barChart, .lineChart{
+.barChartContainer{
+    width: 60vw;
     padding: 2rem;
-    width: 50%;
     height: 500px;
+}
+
+.lineChart{
+    padding: 2rem;
+    width: 40vw;
+    height: 500px;
+    position: relative;
+}
+
+.barChart{
+    width: 100%;
     position: relative;
 }
 
 .barChart button{
     max-width: fit-content;
     min-height: 1rem;
+}
+
+.filters{
+    font-size: 14px;
+    min-width: fit-content;
+    padding-right: 2rem;
+    position: relative;
+}
+
+.filters li button{
+    width: 100%;
+    text-align: left;
+}
+
+@media screen and (max-width : 1600px) {
+
+    .barChartContainer{
+        width: 50%;
+    }
+    
+    .lineChart{
+        margin: auto;
+    }
+}
+
+@media screen and (max-width : 1350px) {
+    .filters{
+        padding-right: 2rem 1rem;
+      }
+
+    .barChartContainer{
+        width: 100%;
+    }
+    
+    .lineChart{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width : 1050px) {   
+    .page{
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .lineChart{
+        width: 100%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width : 850px) {
+    .barChartContainer{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width : 550px) {
+    .barChartContainer{
+        height: 400px;
+        padding: 2rem 1rem;
+    }
+    
+    .lineChart{
+        padding: 2rem 1rem;
+        height: 400px;
+    }
+
+    .filters{
+        font-size: 12px;
+        padding-right: 1rem;
+      }
+
+    .filters button{
+        font-size: 12px;
+    }
 }
