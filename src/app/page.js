@@ -31,8 +31,8 @@ export default async function Home() {
     <div className={styles.page} >
         <Suspense fallback = {<Loading />}>
           <BarChart dataset = {data}/>
+          <LineChart dataset = {data} />
         </Suspense>
-        <LineChart />
     </div>
   );
 }

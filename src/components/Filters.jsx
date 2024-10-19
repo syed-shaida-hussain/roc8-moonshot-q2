@@ -1,15 +1,17 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import styles from "@/app/page.module.css"
 import Calender from './Calender';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Loading from '@/app/loading';
 
 const Filters = ({filterData,setFilterData,initialFilterData}) => {
     const searchParams = useSearchParams();
     const {gender,age} = filterData;
     const router = useRouter()
     const [isDateRangeOpen , setIsDateRangeOpen] = useState(false)
+
     const handleFilterChange = (key, value) => {
         const newFilterData = { ...filterData, [key]: value || undefined };
         setFilterData(newFilterData);
@@ -50,7 +52,10 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
         <li className="flex-col gap-10">
             <span className="">Date </span>
             <button className='pl-10 range-btn' onClick={() => setIsDateRangeOpen(true)}>Custom Range</button>
-             <Calender isDateRangeOpen={isDateRangeOpen} setIsDateRangeOpen = {setIsDateRangeOpen} filterData={filterData} setFilterData={setFilterData} />
+            <Suspense fallback = {<Loading />}>
+              <Calender isDateRangeOpen={isDateRangeOpen} setIsDateRangeOpen = {setIsDateRangeOpen} filterData={filterData} setFilterData={setFilterData} />
+            </Suspense>
+             
         </li>
     </ul>
 </section>

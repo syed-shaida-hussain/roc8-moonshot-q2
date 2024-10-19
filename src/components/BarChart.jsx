@@ -9,6 +9,9 @@ import { useState, useRef, Suspense } from "react";
 import Filters from "./Filters";
 import { useSearchParams } from "next/navigation";
 import Loading from "@/app/loading";
+import { getFilteredDataByDay } from "@/utils/filteredDataByDay";
+import { getFilteredDataByAge } from "@/utils/filteredDataByAge";
+import { getFilteredDataByGender } from "@/utils/filteredDataByGender";
 
 
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title, zoomPlugin)
@@ -18,8 +21,8 @@ const BarChart = ({dataset}) => {
     const searchParams = useSearchParams()
     const initialFilterData = {
         gender : searchParams.get("gender") || "",
-        startDate : dataset[0]?.Day,
-        endDate : dataset[10]?.Day,
+        startDate : searchParams.get("startDate") || null,
+        endDate : searchParams.get("endDate") || null,
         age : searchParams.get("age") || "",
         lineGraphFeature : null,
         lineGraphValue : null
@@ -27,20 +30,11 @@ const BarChart = ({dataset}) => {
     const [filterData , setFilterData] = useState(initialFilterData)
     const {gender,startDate,endDate,age} = filterData;
 
-    const filteredDataByDay = dataset.filter(item => {
-        const itemDate = new Date(item.Day);
-        return itemDate >=new Date(startDate) && itemDate <= new Date(endDate);
-    });
+    const filteredDataByDay = getFilteredDataByDay(dataset,startDate,endDate)
 
-    const filteredDataByGender = filteredDataByDay.filter(item => {
-        if(!gender) return dataset
-        return item.Gender === gender
-    })
+    const filteredDataByGender = getFilteredDataByGender(filteredDataByDay, gender)
 
-    const filteredDataByAge = filteredDataByGender.filter(item => {
-        if(!age) return filteredDataByGender
-        return item.Age === age
-    })
+    const filteredDataByAge = getFilteredDataByAge(filteredDataByGender, age)
 
     const aggregatedData = filteredDataByAge.reduce(
     (acc, curr) => {
@@ -56,8 +50,6 @@ const BarChart = ({dataset}) => {
     
     const featureKeys = Object.keys(aggregatedData); 
     const featureValues = Object.values(aggregatedData);
-
-    console.log(filterData)
 
     const data = {
         labels : featureKeys.reverse(),
