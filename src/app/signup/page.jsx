@@ -4,12 +4,19 @@ import Link from 'next/link'
 import styles from './signupPage.module.css'
 import { useState } from 'react'
 import axios from "axios"
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const SignupPage = () => {
   const [user , setUser] = useState({username: "" , password : ""});
   const [error , setError] = useState({usernameError : "" , passwordError : ""});
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  const queryParams = {};
+  searchParams.forEach((value, key) => {
+    queryParams[key] = value;
+  });
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -19,7 +26,8 @@ const SignupPage = () => {
         setError({...error , usernameError : res?.data?.errors?.username , passwordError : res?.data?.errors?.password})
       }
       if(res?.data?.status === 201){
-        router.push("/login");
+        router.push(`/login?${searchParams}`);
+
       }
     } catch (error) {
       console.log(error)
@@ -38,7 +46,7 @@ const SignupPage = () => {
             <div className={styles.error}>{error?.passwordError}</div>
           </label>
           <button type='submit' className= {styles.button}>Signup</button>
-          <Link href= "/login" className= {styles.link}>Already a user? Login</Link>
+          <Link href= {`/login?${searchParams}`} className= {styles.link}>Already a user? Login</Link>
         </div>
     </form>
   )

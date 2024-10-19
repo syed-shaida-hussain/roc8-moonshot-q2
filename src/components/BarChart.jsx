@@ -5,9 +5,8 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJs, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title } from "chart.js"
 import zoomPlugin from "chartjs-plugin-zoom";
 import { options } from "@/constants/options";
-import { useState, useRef, Suspense } from "react";
+import { useRef, Suspense } from "react";
 import Filters from "./Filters";
-import { useSearchParams } from "next/navigation";
 import Loading from "@/app/loading";
 import { getFilteredDataByDay } from "@/utils/filteredDataByDay";
 import { getFilteredDataByAge } from "@/utils/filteredDataByAge";
@@ -71,7 +70,6 @@ const BarChart = ({dataset, filterData, setFilterData, initialFilterData}) => {
           const label = chart.data.labels[point.index]; 
           const value = chart.data.datasets[point.datasetIndex].data[point.index];
           setFilterData({...filterData, lineGraphFeature : label, lineGraphValue : value})
-          console.log(`Clicked on: ${label}, Value: ${value}`);
         }
 };
 

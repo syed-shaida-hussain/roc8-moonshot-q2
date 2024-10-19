@@ -4,7 +4,7 @@ import React, { Suspense, useState } from 'react'
 import styles from "../app/page.module.css";
 import Loading from '@/app/loading';
 import dynamic from 'next/dynamic';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 const BarChart = dynamic(() => import("@/components/BarChart"), {
     ssr: false,
   });
@@ -14,7 +14,6 @@ const BarChart = dynamic(() => import("@/components/BarChart"), {
 
 const PageWrapper = ({dataset}) => {
     const searchParams = useSearchParams();
-    const router = useRouter()
 
     const initialFilterData = {
         gender : searchParams.get("gender") || "",

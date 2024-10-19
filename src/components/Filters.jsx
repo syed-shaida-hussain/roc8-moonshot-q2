@@ -6,7 +6,7 @@ import Calender from './Calender';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loading from '@/app/loading';
 
-const Filters = ({filterData,setFilterData,initialFilterData}) => {
+const Filters = ({filterData,setFilterData}) => {
     const searchParams = useSearchParams();
     const {gender,age} = filterData;
     const router = useRouter()
@@ -29,7 +29,6 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
         try {
           const res = await fetch("/api/user/logout")
           router.push('/login')
-          console.log(res)
         } catch (error) {
           console.log(error)
         }
@@ -37,7 +36,7 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
 
   return (
     <section className= {`${styles.filters} flex-col gap-10 filters`} >
-    <span><button className= "mt-10 btn" onClick={() => setFilterData(initialFilterData)}>Clear all filters</button> </span>
+    <span className='mb-10'>Filters :</span>
     <ul className="flex-col gap-10">
         <li className="flex-col gap-10">
         <select

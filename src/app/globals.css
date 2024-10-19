@@ -54,6 +54,10 @@ body{
   margin-top: 20px;
 }
 
+.mb-10{
+  margin-bottom: 10px;
+}
+
 .btn{
   border: 1px solid black;
   border-radius: 5px;
