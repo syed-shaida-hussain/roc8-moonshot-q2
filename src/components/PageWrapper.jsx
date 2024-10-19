@@ -5,6 +5,7 @@ import styles from "../app/page.module.css";
 import Loading from '@/app/loading';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 const BarChart = dynamic(() => import("@/components/BarChart"), {
     ssr: false,
   });
@@ -14,12 +15,11 @@ const BarChart = dynamic(() => import("@/components/BarChart"), {
 
 const PageWrapper = ({dataset}) => {
     const searchParams = useSearchParams();
-
     const initialFilterData = {
-        gender : searchParams.get("gender") || "",
-        startDate : searchParams.get("startDate") || null,
-        endDate : searchParams.get("endDate") || null,
-        age : searchParams.get("age") || "",
+        gender : searchParams.get("gender") || getCookie("gender") || "",
+        startDate : searchParams.get("startDate") || new Date(2022, 8, 6),
+        endDate : searchParams.get("endDate") || new Date(2022, 8, 9),
+        age : searchParams.get("age") || getCookie("age") || "",
         lineGraphFeature : null,
         lineGraphValue : null
     }

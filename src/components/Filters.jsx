@@ -5,6 +5,7 @@ import styles from "@/app/page.module.css"
 import Calender from './Calender';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Loading from '@/app/loading';
+import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 
 const Filters = ({filterData,setFilterData}) => {
     const searchParams = useSearchParams();
@@ -17,10 +18,13 @@ const Filters = ({filterData,setFilterData}) => {
         setFilterData(newFilterData);
         const params = new URLSearchParams(searchParams);
 
+
         if (value) {
           params.set(key, value);
+          setCookie(key,value)
         } else {
           params.delete(key);
+          deleteCookie(key)
         }
         router.push(`/?${params.toString()}`, { shallow: true });
       };
