@@ -30,6 +30,7 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
     <ul className="flex-col gap-10">
         <li className="flex-col gap-10">
         <select
+        name='gender'
         value={gender}
         onChange={(e) => handleFilterChange("gender" , e.target.value) }>
         <option value="">Gender</option>
@@ -43,6 +44,7 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
         <li className="flex-col gap-10">
         <select
         value={age}
+        name='age'
         onChange={(e) => handleFilterChange("age" , e.target.value) }>
         <option value="">Age</option>
         <option value="15-25">15-25</option>

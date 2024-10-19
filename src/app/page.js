@@ -1,16 +1,6 @@
-// import BarChart from "@/components/BarChart";
-import styles from "./page.module.css";
-import LineChart from "@/components/LineChart";
-import dynamic from "next/dynamic";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import Loading from "./loading";
-import { Suspense } from "react";
-
-const BarChart = dynamic(() => import("@/components/BarChart"), {
-  ssr: false,
-});
-
+import PageWrapper from "@/components/PageWrapper";
 
 const fetchData = async()  => {
   try {
@@ -26,13 +16,7 @@ export default async function Home() {
     return null;
 }
   const {data} = await fetchData();
-  console.log(data.length)
   return (
-    <div className={styles.page} >
-        <Suspense fallback = {<Loading />}>
-          <BarChart dataset = {data}/>
-          <LineChart dataset = {data} />
-        </Suspense>
-    </div>
+    <PageWrapper dataset={data} />
   );
 }

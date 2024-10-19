@@ -1,9 +1,10 @@
 .page{
     display: flex;
+    justify-content: center;
 }
 
 .barChartContainer{
-    width: 60vw;
+    width: 55vw;
     padding: 2rem;
     height: 500px;
 }
@@ -43,7 +44,7 @@
     border-radius: 5px;
 }
 
-@media screen and (max-width : 1600px) {
+@media screen and (max-width : 1750px) {
     .barChartContainer{
         width: 50%;
     }
@@ -53,35 +54,40 @@
     }
 }
 
+@media screen and (max-width : 1550px) {
+    .barChartContainer{
+        width: 50%;
+    }
+    
+    .lineChart{
+        width: 40%;
+    }
+}
+
 @media screen and (max-width : 1350px) {
+    .page{
+        flex-direction: column;
+        align-items: center;
+    }
+
     .filters{
         padding-right: 2rem 1rem;
       }
 
-    .barChartContainer{
-        width: 100%;
-    }
-    
-    .lineChart{
-        width: 90%;
-    }
-}
-
-@media screen and (max-width : 1050px) {   
-    .page{
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .lineChart{
+      .lineChart{
         width: 100%;
         margin: auto;
+    }
+
+    .barChartContainer{
+        width: 100%;
     }
 }
 
 @media screen and (max-width : 850px) {
-    .barChartContainer{
-        width: 100%;
+    .lineChart{
+        width: 100vw;
+        margin: auto;
     }
 }
 

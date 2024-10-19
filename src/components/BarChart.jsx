@@ -16,18 +16,9 @@ import { getFilteredDataByGender } from "@/utils/filteredDataByGender";
 
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title, zoomPlugin)
 
-const BarChart = ({dataset}) => {
+const BarChart = ({dataset, filterData, setFilterData, initialFilterData}) => {
     const chartRef = useRef(null);
-    const searchParams = useSearchParams()
-    const initialFilterData = {
-        gender : searchParams.get("gender") || "",
-        startDate : searchParams.get("startDate") || null,
-        endDate : searchParams.get("endDate") || null,
-        age : searchParams.get("age") || "",
-        lineGraphFeature : null,
-        lineGraphValue : null
-    }
-    const [filterData , setFilterData] = useState(initialFilterData)
+
     const {gender,startDate,endDate,age} = filterData;
 
     const filteredDataByDay = getFilteredDataByDay(dataset,startDate,endDate)
@@ -97,7 +88,7 @@ const BarChart = ({dataset}) => {
         </Suspense>
         <div className= {styles.barChart}>
         <Bar data={data} options={options} ref={chartRef} onClick={handleBarClick}/>
-        <button onClick={resetZoomHandler}>Reset zoom</button>
+        <button className="reset-zoom-btn" onClick={resetZoomHandler}>Reset zoom</button>
         </div>
         
     </div>
