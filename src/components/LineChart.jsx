@@ -113,7 +113,7 @@ const LineChart = ({dataset , filterData}) => {
   return (
     <div className= {styles.lineChart}>
         <Line data={data} options={options} ref={lineRef} />
-        <button className="reset-zoom-btn" onClick={resetZoomHandler}>Reset zoom</button>
+        <button className="btn" onClick={resetZoomHandler}>Reset zoom</button>
     </div>
   )
 }

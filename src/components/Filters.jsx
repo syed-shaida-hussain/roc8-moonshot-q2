@@ -26,7 +26,7 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
       };
   return (
     <section className= {`${styles.filters} flex-col gap-10 filters`} >
-    <span><button className= "mt-10" onClick={() => setFilterData(initialFilterData)}>Clear all filters</button> </span>
+    <span><button className= "mt-10 btn" onClick={() => setFilterData(initialFilterData)}>Clear all filters</button> </span>
     <ul className="flex-col gap-10">
         <li className="flex-col gap-10">
         <select
@@ -53,7 +53,7 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
         </li>
         <li className="flex-col gap-10">
             <span className="">Date </span>
-            <button className='pl-10 range-btn' onClick={() => setIsDateRangeOpen(true)}>Custom Range</button>
+            <button className='pl-10 range-btn btn' onClick={() => setIsDateRangeOpen(true)}>Custom Range</button>
             <Suspense fallback = {<Loading />}>
               <Calender isDateRangeOpen={isDateRangeOpen} setIsDateRangeOpen = {setIsDateRangeOpen} filterData={filterData} setFilterData={setFilterData} />
             </Suspense>

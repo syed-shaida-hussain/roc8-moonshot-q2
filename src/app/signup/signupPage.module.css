@@ -49,6 +49,7 @@
     background-color: var(--text-color);
     color: var(--bg);
     width: 100%;
+    cursor: pointer;
 }
 
 .link{

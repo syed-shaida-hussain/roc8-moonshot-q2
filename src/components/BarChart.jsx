@@ -88,7 +88,7 @@ const BarChart = ({dataset, filterData, setFilterData, initialFilterData}) => {
         </Suspense>
         <div className= {styles.barChart}>
         <Bar data={data} options={options} ref={chartRef} onClick={handleBarClick}/>
-        <button className="reset-zoom-btn" onClick={resetZoomHandler}>Reset zoom</button>
+        <button className="btn" onClick={resetZoomHandler}>Reset zoom</button>
         </div>
         
     </div>
