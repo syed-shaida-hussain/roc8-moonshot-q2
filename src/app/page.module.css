@@ -75,31 +75,35 @@
       }
 
       .lineChart{
+        width: 70%;
+        margin: auto;
+        height: 400px;
+    }
+
+    .barChartContainer{
+        width: 70%;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width : 1100px) {
+    .lineChart{
         width: 100%;
         margin: auto;
     }
 
     .barChartContainer{
         width: 100%;
-    }
-}
-
-@media screen and (max-width : 850px) {
-    .lineChart{
-        width: 100vw;
-        margin: auto;
     }
 }
 
 @media screen and (max-width : 550px) {
     .barChartContainer{
-        height: 400px;
         padding: 2rem 1rem;
     }
     
     .lineChart{
         padding: 2rem 1rem;
-        height: 400px;
     }
 
     .filters{

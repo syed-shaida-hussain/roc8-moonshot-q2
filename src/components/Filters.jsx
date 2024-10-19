@@ -24,6 +24,17 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
         }
         router.push(`/?${params.toString()}`, { shallow: true });
       };
+
+      const logout = async () => {
+        try {
+          const res = await fetch("/api/user/logout")
+          router.push('/login')
+          console.log(res)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+
   return (
     <section className= {`${styles.filters} flex-col gap-10 filters`} >
     <span><button className= "mt-10 btn" onClick={() => setFilterData(initialFilterData)}>Clear all filters</button> </span>
@@ -54,6 +65,8 @@ const Filters = ({filterData,setFilterData,initialFilterData}) => {
         <li className="flex-col gap-10">
             <span className="">Date </span>
             <button className='pl-10 range-btn btn' onClick={() => setIsDateRangeOpen(true)}>Custom Range</button>
+            <span className='btn mt-20' onClick={() => logout()}>Logout</span>
+
             <Suspense fallback = {<Loading />}>
               <Calender isDateRangeOpen={isDateRangeOpen} setIsDateRangeOpen = {setIsDateRangeOpen} filterData={filterData} setFilterData={setFilterData} />
             </Suspense>

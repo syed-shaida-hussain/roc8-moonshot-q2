@@ -25,18 +25,8 @@ const PageWrapper = ({dataset}) => {
         lineGraphValue : null
     }
     const [filterData , setFilterData] = useState(initialFilterData)
-    const logout = async () => {
-      try {
-        const res = await fetch("/api/user/logout")
-        router.push('/login')
-        console.log(res)
-      } catch (error) {
-        console.log(error)
-      }
-    }
   return (
     <div className={styles.page} >
-    <button className='btn mt-20' onClick={() => logout()}>Logout</button>
     <Suspense fallback = {<Loading />}>
       <BarChart dataset = {dataset} filterData = {filterData} setFilterData = {setFilterData} initialFilterData = {initialFilterData} />
       {filterData?.lineGraphFeature && <LineChart dataset = {dataset} filterData = {filterData} setFilterData = {setFilterData} />}
