@@ -1,117 +1,207 @@
-.page{
+.page {
     display: flex;
-    justify-content: center;
+    gap: 10px;
+    justify-content: space-around;
 }
 
-.barChartContainer{
-    width: 55vw;
-    padding: 2rem;
-    height: 500px;
+.line {
+    min-width: 100%;
 }
 
-.lineChart{
+.barChartContainer {
+    width: 55%;
     padding: 2rem;
-    width: 40vw;
-    height: 500px;
+    height: 700px;
+}
+
+.lineChart {
+    padding: 2rem;
+    width: 40%;
+    height: 700px;
     position: relative;
 }
 
-.barChart{
+.barChart {
     width: 100%;
     position: relative;
 }
 
-.barChart button{
+.barChart button {
     max-width: fit-content;
     min-height: 1rem;
 }
 
-.filters{
+.filters {
     font-size: 14px;
     min-width: fit-content;
     padding-right: 2rem;
     position: relative;
 }
 
-.filters li button{
+.filters li button {
     width: 100%;
     text-align: left;
 }
 
-.filters select{
+.filters select {
     border: 1px solid black;
     padding: 0.5rem;
     border-radius: 5px;
 }
 
-@media screen and (max-width : 1750px) {
-    .barChartContainer{
-        width: 50%;
+@media screen and (max-width : 1800px) {
+    .barChartContainer {
+        width: 45%;
+        height: 550px;
     }
-    
-    .lineChart{
-        margin: auto;
+
+    .lineChart {
+        width: 35%;
+        height: 550px;
+    }
+
+    .page {
+        gap: 20px;
     }
 }
 
-@media screen and (max-width : 1550px) {
-    .barChartContainer{
+@media screen and (max-width : 1600px) {
+    .barChartContainer {
         width: 50%;
+        height: 500px;
     }
-    
-    .lineChart{
+
+    .lineChart {
         width: 40%;
+        height: 500px;
     }
 }
 
 @media screen and (max-width : 1350px) {
-    .page{
+    .page {
         flex-direction: column;
-        align-items: center;
+        gap: 0;
     }
 
-    .filters{
-        padding-right: 2rem 1rem;
-      }
+    .filters {
+        padding-right: 0.5rem;
+    }
 
-      .lineChart{
-        width: 70%;
+    .lineChart {
         margin: auto;
-        height: 400px;
+        width: 70%;
+        height: 450px;
     }
 
-    .barChartContainer{
-        width: 70%;
-        height: 400px;
+    .barChartContainer {
+        margin: auto;
+        width: 80%;
+        height: 450px;
     }
 }
 
 @media screen and (max-width : 1100px) {
-    .lineChart{
-        width: 100%;
-        margin: auto;
+    .lineChart {
+        width: 800px;
+        margin: 0 1rem;
     }
 
-    .barChartContainer{
-        width: 100%;
+    .barChartContainer {
+        width: 850px;
+        margin: 0 1rem;
+    }
+}
+
+@media screen and (max-width : 900px) {
+    .lineChart {
+        width: 680px;
+    }
+
+    .barChartContainer {
+        width: 700px;
+    }
+}
+
+@media screen and (max-width : 800px) {
+    .lineChart {
+        width: 630px;
+    }
+
+    .barChartContainer {
+        width: 650px;
+    }
+}
+
+@media screen and (max-width : 700px) {
+    .lineChart {
+        width: 580px;
+    }
+
+    .barChartContainer {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width : 600px) {
+    .lineChart {
+        width: 500px;
+        height: 400px;
+        padding: 2rem 0;
+    }
+
+    .barChartContainer {
+        width: 500px;
+        height: 400px;
+        padding: 2rem 0;
+    }
+
+    .filters {
+        font-size: 12px;
+    }
+
+    .filters button {
+        font-size: 12px;
     }
 }
 
 @media screen and (max-width : 550px) {
-    .barChartContainer{
-        padding: 2rem 1rem;
-    }
-    
-    .lineChart{
-        padding: 2rem 1rem;
+    .lineChart {
+        width: 450px;
     }
 
-    .filters{
-        font-size: 12px;
-        padding-right: 1rem;
-      }
+    .barChartContainer {
+        width: 450px;
+    }
+}
 
-    .filters button{
-        font-size: 12px;
+@media screen and (max-width : 500px) {
+    .lineChart {
+        width: 400px;
+    }
+
+    .barChartContainer {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width : 450px) {
+    .lineChart {
+        width: 350px;
+        margin: 0 0 0 1rem;
+    }
+
+    .barChartContainer {
+        width: 350px;
+        margin: 0 0 0 1rem;
+    }
+}
+
+@media screen and (max-width : 400px) {
+    .lineChart {
+        width: 300px;
+    }
+
+    .barChartContainer {
+        width: 300px;
     }
 }

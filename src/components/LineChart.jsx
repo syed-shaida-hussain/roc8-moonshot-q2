@@ -2,7 +2,7 @@
 import  { Line } from "react-chartjs-2";
 import { Chart as ChartJs, LineElement , LinearScale, CategoryScale, PointElement, Legend, Tooltip} from "chart.js";
 import styles from "@/app/page.module.css"
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 import { getFilteredDataByDay } from "@/utils/filteredDataByDay";
 import { getFilteredDataByGender } from "@/utils/filteredDataByGender";
 import { getFilteredDataByAge } from "@/utils/filteredDataByAge";
@@ -11,18 +11,21 @@ import { useRef } from "react";
 ChartJs.register(LineElement , LinearScale, CategoryScale, PointElement, Legend, Tooltip)
 
 const LineChart = ({dataset , filterData}) => {
-    const searchParams = useSearchParams();
+    // const searchParams = useSearchParams();
+    const {startDate,endDate,gender,age} = filterData
     const lineRef = useRef(null);
-    const startDate = searchParams.get("startDate")
-    const endDate = searchParams.get("endDate")
-    const gender = searchParams.get('gender')
-    const age = searchParams.get('age')
+    // const startDate = searchParams.get("startDate")
+    // const endDate = searchParams.get("endDate")
+    // const gender = searchParams.get('gender')
+    // const age = searchParams.get('age')
 
     const filteredDataByDay = getFilteredDataByDay(dataset,startDate,endDate)
 
     const filteredDataByGender = getFilteredDataByGender(filteredDataByDay, gender)
 
     const filteredDataByAge = getFilteredDataByAge(filteredDataByGender, age)
+    const sortedData =  filteredDataByAge.sort((a, b) => new Date(a?.Day) - new Date(b?.Day));
+    console.log(filteredDataByAge)
 
     const formatDate = (isoString) => {
         const date = new Date(isoString);
@@ -90,13 +93,13 @@ const LineChart = ({dataset , filterData}) => {
         totalFeature: totalFeature
       }));
     };
-    const lineChartLabels = filteredDataByAge.map(item => formatDate(item?.Day))
-    const lineChartData = sumOfFeatureByDate(filteredDataByAge)
+    const lineChartLabels = sortedData.map(item => formatDate(item?.Day))
+    const lineChartData = sumOfFeatureByDate(sortedData)
       const data = {
         labels : [...new Set(lineChartLabels)],
         datasets : [
             {
-                label : "Total Time",
+                label : "Time trend",
                 data : lineChartData.map(item => item.totalFeature),
                 backgroundColor : "#3b82f6",
                 borderColor : "#3b82f6",
@@ -112,7 +115,7 @@ const LineChart = ({dataset , filterData}) => {
 
   return (
     <div className= {styles.lineChart}>
-        <Line data={data} options={options} ref={lineRef} />
+        <Line data={data} options={options} ref={lineRef} className= {styles.line} />
         <button className="btn" onClick={resetZoomHandler}>Reset zoom</button>
     </div>
   )
